@@ -1,7 +1,7 @@
 "use strict";
 
 const bodyParser = require( "body-parser" );
-const bundle = require( "@pegjs/bundle-generator" );
+// const bundle = require( "@pegjs/bundle-generator" );
 const express = require( "express" );
 const layout = require( "express-layout" );
 const logger = require( "morgan" );
@@ -114,31 +114,31 @@ app.get( "/development/benchmark", ( req, res ) => {
 
 } );
 
-/* Bundle local sources (and watch for changes on non-production NODE_ENV) */
+// /* Bundle local sources (and watch for changes on non-production NODE_ENV) */
 
-[
-    { name: "benchmark", input: "tools/benchmark/browser.js" },
-    { name: "peg", input: "packages/pegjs/lib/peg.js", format: "umd" },
-    { name: "test", input: "test/**/*.js" },
+// [
+//     { name: "benchmark", input: "tools/benchmark/browser.js" },
+//     { name: "peg", input: "packages/pegjs/lib/peg.js", format: "umd" },
+//     { name: "test", input: "test/**/*.js" },
 
-].forEach( project => {
+// ].forEach( project => {
 
-    bundle( {
+//     bundle( {
 
-        format: project.format,
-        name: project.name,
-        source: project.input,
-        target: `website/js/${ project.name }-bundle.js`,
-        silent: !! WARNINGS,
-        watch: NODE_ENV !== "production",
+//         format: project.format,
+//         name: project.name,
+//         source: project.input,
+//         target: `website/js/${ project.name }-bundle.js`,
+//         silent: !! WARNINGS,
+//         watch: NODE_ENV !== "production",
 
-    } );
+//     } );
 
-} );
+// } );
 
 /* Main */
 
-app.listen( 80, () => {
+app.listen( 8070, () => {
 
     console.log( "The PEG.js website is running on the localhost in %s mode...", app.get( "env" ) );
 

@@ -436,7 +436,10 @@ CodeBlock "code block"
   / "{" { error("Unbalanced brace."); }
 
 Code
-  = $((![{}] SourceCharacter)+ / "{" Code "}")*
+  = code:$((![{}] SourceCharacter)+ / "{" Code "}")* { 
+    if (code.includes('\n') || code.match(/return/)) return code;
+    return 'return ' + code;
+  }
 
 // Unicode Character Categories
 //
